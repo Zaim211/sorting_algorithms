@@ -23,7 +23,7 @@ void swap(int *a, int *b)
  *
  * Return: the index of the pivot element final sorted position in array
  */
-int lomuto_partition(int *array, int low, int high)
+int lomuto_partition(int *array, size_t size, int low, int high)
 {
 	int i, j, pivot;
 
@@ -38,6 +38,7 @@ int lomuto_partition(int *array, int low, int high)
 		}
 	}
 	swap(&array[i + 1], &array[high]);
+	print_array(array, size);
 	return (i + 1);
 }
 
@@ -70,19 +71,17 @@ void quick_sort(int *array, size_t size)
 		high = stack[top--];
 		low = stack[top--];
 
-		pivot_index = lomuto_partition(array, low, high);
+		pivot_index = lomuto_partition(array, size, low, high);
 
 		if (pivot_index - 1 > low)
 		{
 			stack[++top] = low;
 			stack[++top] = pivot_index - 1;
-			print_array(array, size);
 		}
 		if (pivot_index + 1 < high)
 		{
 			stack[++top] = pivot_index + 1;
 			stack[++top] = high;
-			print_array(array, size);
 		}
 	}
 	print_array(array, size);
