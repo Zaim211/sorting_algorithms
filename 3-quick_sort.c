@@ -17,12 +17,13 @@ void swap(int *a, int *b)
 /**
  * lomuto_partition - Function that partition scheme
  * @array: The array of integers that you want to partition
+ * @size: The size of the array
  * @high: Indice that define the range high of element within the array
  * @low: Indice that define the range low of element within the array
  *
  * Return: the index of the pivot element final sorted position in array
  */
-int lomuto_partition(int *array, int low, int high)
+int lomuto_partition(int *array, size_t size, int low, int high)
 {
 	int i, j, pivot;
 
@@ -34,6 +35,7 @@ int lomuto_partition(int *array, int low, int high)
 		{
 			i++;
 			swap(&array[i], &array[j]);
+			print_array(array, size);
 		}
 	}
 	swap(&array[i + 1], &array[high]);
@@ -69,19 +71,17 @@ void quick_sort(int *array, size_t size)
 		high = stack[top--];
 		low = stack[top--];
 
-		pivot_index = lomuto_partition(array, low, high);
+		pivot_index = lomuto_partition(array, size, low, high);
 
 		if (pivot_index - 1 > low)
 		{
 			stack[++top] = low;
 			stack[++top] = pivot_index - 1;
-			print_array(array, size);
 		}
 		if (pivot_index + 1 < high)
 		{
 			stack[++top] = pivot_index + 1;
 			stack[++top] = high;
-			print_array(array, size);
 		}
 	}
 	free(stack);
