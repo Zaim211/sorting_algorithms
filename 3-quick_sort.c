@@ -75,13 +75,14 @@ void quick_sort(int *array, size_t size)
 		{
 			stack[++top] = low;
 			stack[++top] = pivot_index - 1;
+			print_array(array, size);
 		}
 		if (pivot_index + 1 < high)
 		{
 			stack[++top] = pivot_index + 1;
 			stack[++top] = high;
+			print_array(array, size);
 		}
-	print_array(array, size);
 	}
 	free(stack);
 }
